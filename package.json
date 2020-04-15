@@ -1,6 +1,6 @@
 {
-  "name": "math-interval",
-  "version": "1.0.0",
+  "name": "math-in-interval",
+  "version": "0.0.1",
   "description": "",
   "source": "src/index.ts",
   "main": "build/index.es.js",
