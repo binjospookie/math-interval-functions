@@ -1,1 +1,1 @@
-export const isNill = (x: unknown): x is null | undefined => x === null || x === undefined;
+export const isNil = (x: unknown): x is null | undefined => x === null || x === undefined;

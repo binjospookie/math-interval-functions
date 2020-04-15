@@ -12,7 +12,7 @@ interface IComparatorArgument {
 const makeComparator = (fn1: TCompareFn, fn2: TCompareFn) => ({ value, min, max }: IComparatorArgument) =>
   fn1(value, min) && fn2(value, max);
 
-interface IInterval {
+export interface IInterval {
   readonly comparator: (x: IComparatorArgument) => boolean;
   readonly regex: RegExp;
 }
