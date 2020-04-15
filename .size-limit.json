@@ -1,0 +1,7 @@
+[
+  {
+    "brotli": true,
+    "path": "build/index.js",
+    "limit": "200 B"
+  }
+]
