@@ -1,40 +1,23 @@
-import { closed, leftClosed, leftOpen, opened } from './intervals';
-import { gt, gte, lt, lte } from './services/math';
-import { isNill } from './services/type';
+import { intervalsList } from './services/intervals';
+import { isEmpty, isNill } from './services/logic';
 
-const intervals = [
-  {
-    compare: [gt, lt],
-    regex: opened,
-  },
-  {
-    compare: [gte, lte],
-    regex: closed,
-  },
-  {
-    compare: [gt, lte],
-    regex: leftOpen,
-  },
-  {
-    compare: [gte, lt],
-    regex: leftClosed,
-  },
-];
+const parseLimit = (value: string, defaultValue: number) => (isEmpty(value) ? defaultValue : Number(value));
 
-export const inInterval = (incomeInterval: string, value: number) => {
-  // tslint:disable-next-line:no-shadowed-variable
-  const interval = intervals.find(({ regex }) => !isNill(incomeInterval.match(regex)));
+export const inInterval = (interval: string, value: number) => {
+  const suitableIntervalFromList = intervalsList.find(({ regex }) => !isNill(interval.match(regex)));
 
-  if (isNill(interval)) {
+  if (isNill(suitableIntervalFromList)) {
     return false;
   }
 
-  const {
-    regex,
-    compare: [minCom, maxCom],
-  } = interval;
+  const { regex, comparator } = suitableIntervalFromList;
 
-  const [match, min = Number.NEGATIVE_INFINITY, max = Number.POSITIVE_INFINITY] = incomeInterval.match(regex) || [];
+  // @ts-ignore we already found it upper
+  const [match, min, max] = interval.match(regex);
 
-  return minCom(value, Number(min)) && maxCom(value, Number(max));
+  return comparator({
+    max: parseLimit(max, Infinity),
+    min: parseLimit(min, -Infinity),
+    value,
+  });
 };

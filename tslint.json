@@ -13,7 +13,8 @@
     "no-any": true,
     "unnecessary-constructor": true,
     "no-default-export": true,
-    "no-bitwise": false
+    "no-bitwise": false,
+    "no-shadowed-variable": false
   },
   "rulesDirectory": []
 }
