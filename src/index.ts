@@ -1,23 +1,20 @@
 import { intervalsList } from './services/intervals';
-import { isEmpty, isNill } from './services/logic';
+import { isNill } from './services/logic';
+import { parseLimit } from './services/math';
 
-const parseLimit = (value: string, defaultValue: number) => (isEmpty(value) ? defaultValue : Number(value));
+export const inInterval = (interval: string, value: number) =>
+  intervalsList.reduce((acc, { regex, comparator }) => {
+    const matchResult = interval.match(regex);
 
-export const inInterval = (interval: string, value: number) => {
-  const suitableIntervalFromList = intervalsList.find(({ regex }) => !isNill(interval.match(regex)));
+    if (isNill(matchResult)) {
+      return acc;
+    }
 
-  if (isNill(suitableIntervalFromList)) {
-    return false;
-  }
+    const [match, min, max] = matchResult;
 
-  const { regex, comparator } = suitableIntervalFromList;
-
-  // @ts-ignore we already found it upper
-  const [match, min, max] = interval.match(regex);
-
-  return comparator({
-    max: parseLimit(max, Infinity),
-    min: parseLimit(min, -Infinity),
-    value,
-  });
-};
+    return comparator({
+      max: parseLimit(max, Infinity),
+      min: parseLimit(min, -Infinity),
+      value,
+    });
+  }, false);
