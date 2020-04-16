@@ -4,6 +4,12 @@ describe('InInterval tests', () => {
   test('open', () => {
     expect(
       inInterval({
+        interval: '(100,500)',
+        value: 120,
+      }),
+    ).toBeTruthy();
+    expect(
+      inInterval({
         interval: '(1,5)',
         value: 1,
       }),
