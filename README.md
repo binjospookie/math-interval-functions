@@ -5,6 +5,9 @@
 
 A tiny (89 bytes) and blazing fast solution for operations on intervals.
 
+## Installation
+`npm i math-interval-functions`
+
 ## Functions
 ### inInterval
 Check that value belongs to the interval.
