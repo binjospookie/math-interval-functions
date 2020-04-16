@@ -20,7 +20,7 @@ const intervalsList: readonly {
   },
 ];
 
-export const inInterval = (interval: string, value: number) =>
+export const inInterval = ({ interval, value }: { interval: string; value: number }) =>
   intervalsList.some(({ regex, comparator }) => {
     const matchResult = regex.exec(interval);
 
