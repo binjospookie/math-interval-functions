@@ -4,19 +4,19 @@ const intervalsList: readonly {
 }[] = [
   {
     comparator: ({ value, min, max }) => value > min && value < max,
-    regex: /^\(([0-9-.]*),([0-9-.]*)\)$/,
+    regex: /^\(([\d-.]*),([\d-.]*)\)$/,
   },
   {
     comparator: ({ value, min, max }) => value >= min && value <= max,
-    regex: /^\[([0-9-.]*),([0-9-.]*)\]$/,
+    regex: /^\[([\d-.]*),([\d-.]*)\]$/,
   },
   {
     comparator: ({ value, min, max }) => value > min && value <= max,
-    regex: /^\(([0-9-.]*),([0-9-.]*)\]$/,
+    regex: /^\(([\d-.]*),([\d-.]*)\]$/,
   },
   {
     comparator: ({ value, min, max }) => value >= min && value < max,
-    regex: /^\[([0-9-.]*),([0-9-.]*)\)$/,
+    regex: /^\[([\d-.]*),([\d-.]*)\)$/,
   },
 ];
 
@@ -31,8 +31,10 @@ export const inInterval = ({ interval, value }: { interval: string; value: numbe
     const [match, min, max] = matchResult;
 
     return comparator({
-      max: !max ? Infinity : ~~max,
-      min: !min ? -Infinity : ~~min,
+      // @ts-ignore allow js to cast string
+      max: max || Infinity,
+      // @ts-ignore allow js to cast string
+      min: min || -Infinity,
       value,
     });
   });
