@@ -1,16 +1,10 @@
-import { gt, gte, lt, lte } from '../math';
 import { closed, leftClosed, leftOpen, opened } from './constants';
-
-type TCompareFn = (a: number, b: number) => boolean;
 
 interface IComparatorArgument {
   readonly max: number;
   readonly min: number;
   readonly value: number;
 }
-
-const makeComparator = (fn1: TCompareFn, fn2: TCompareFn) => ({ value, min, max }: IComparatorArgument) =>
-  fn1(value, min) && fn2(value, max);
 
 export interface IInterval {
   readonly comparator: (x: IComparatorArgument) => boolean;
@@ -19,19 +13,19 @@ export interface IInterval {
 
 export const intervalsList: readonly IInterval[] = [
   {
-    comparator: makeComparator(gt, lt),
+    comparator: ({ value, min, max }: IComparatorArgument) => value > min && value < max,
     regex: opened,
   },
   {
-    comparator: makeComparator(gte, lte),
+    comparator: ({ value, min, max }: IComparatorArgument) => value >= min && value <= max,
     regex: closed,
   },
   {
-    comparator: makeComparator(gt, lte),
+    comparator: ({ value, min, max }: IComparatorArgument) => value > min && value <= max,
     regex: leftOpen,
   },
   {
-    comparator: makeComparator(gte, lt),
+    comparator: ({ value, min, max }: IComparatorArgument) => value >= min && value < max,
     regex: leftClosed,
   },
 ];

@@ -14,7 +14,7 @@ const formatNumber = (x: number) =>
 test('Operations per second', () => {
   suite
     .add('v0.0.1', () => {
-      inInterval('[1,100]', 50);
+      inInterval('[1,1000]', 50);
     })
     // tslint:disable-next-line
     .on('cycle', (event: any) => {
