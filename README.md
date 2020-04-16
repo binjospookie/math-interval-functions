@@ -1,69 +1,38 @@
-# math-interval
+# math-interval-functions
+![Typed with TypeScript](https://flat.badgen.net/badge/icon/Typed?icon=typescript&label&labelColor=blue&color=555555)
+![Version](https://badgen.net/npm/v/math-interval-functions)
+![CI](https://github.com/binjospookie/math-interval-functions/workflows/Build/badge.svg)
 
-## Examples
+A tiny (89 bytes) and blazing fast solution for operations on intervals.
 
+## Functions
+### inInterval
+Check that value belongs to the interval.
+
+#### Examples
 ```javascript
-inInterval('(1,5)', 1); // false
-inInterval('[1,5)', 1); // true
-inInterval('[1,5)', 5); // false
-inInterval('[1,5]', 5); // true
-inInterval('(1,5]', 5); // true
-inInterval('(,5]', 5); // true
-inInterval('(,5]', 1); // true
+inInterval({ interval: '(1,5)', value: 1 }); // false
+inInterval({ interval: '[1,5)', value: 1 }); // true
+inInterval({ interval: '[1,5)', value: 5 }); // false
+inInterval({ interval: '[1,5]', value: 5 }); // true
+inInterval({ interval: '(1,5]', value: 5 }); // true
+inInterval({ interval: '(,5]', value: 5 }); // true
+inInterval({ interval: '(,5]', value: 1 }); // true
+inInterval({ interval: '123jkvb12h3b12h3', value: 1 }); // false
+inInterval({ interval: '[-10,0]', value: -5 }); // true
+inInterval({ interval: '[-10,0]', value: 1 }); // false
 ```
 
-## More examples
-```javascript
-test('open', () => {
-  expect(inInterval('(1,5)', 1)).toBeFalsy();
-  expect(inInterval('(1,5)', 5)).toBeFalsy();
-  expect(inInterval('(-1,5)', 1)).toBeTruthy();
-  expect(inInterval('(-1,5)', 5)).toBeFalsy();
-  expect(inInterval('(-1,-5)', 5)).toBeFalsy();
-  expect(inInterval('(,-5)', -100)).toBeTruthy();
-  expect(inInterval('(-1,)', 5)).toBeTruthy();
-  expect(inInterval('(-1,)', -5)).toBeFalsy();
-});
+### Addition
+WIP
+### Subtraction
+WIP
+### Multiplication
+WIP
+### Division
+WIP
 
-test('closed', () => {
-  expect(inInterval('[1,5]', 1)).toBeTruthy();
-  expect(inInterval('[1,5]', 5)).toBeTruthy();
-  expect(inInterval('[-1,5]', 1)).toBeTruthy();
-  expect(inInterval('[-1,5]', 5)).toBeTruthy();
-  expect(inInterval('[-1,-5]', 5)).toBeFalsy();
-  expect(inInterval('[,-5]', -100)).toBeTruthy();
-  expect(inInterval('[-1,]', 5)).toBeTruthy();
-  expect(inInterval('[-1,]', -5)).toBeFalsy();
-});
-
-test('leftOpen', () => {
-  expect(inInterval('(1,5]', 1)).toBeFalsy();
-  expect(inInterval('(1,5]', 5)).toBeTruthy();
-  expect(inInterval('(-1,5]', 1)).toBeTruthy();
-  expect(inInterval('(-1,5]', 5)).toBeTruthy();
-  expect(inInterval('(-1,-5]', 5)).toBeFalsy();
-  expect(inInterval('(,-5]', -100)).toBeTruthy();
-  expect(inInterval('(-1,]', 5)).toBeTruthy();
-  expect(inInterval('(-1,]', -1)).toBeFalsy();
-});
-
-test('rightOpen', () => {
-  expect(inInterval('[1,5)', 1)).toBeTruthy();
-  expect(inInterval('[1,5)', 5)).toBeFalsy();
-  expect(inInterval('[-1,5)', 1)).toBeTruthy();
-  expect(inInterval('[-1,5)', 5)).toBeFalsy();
-  expect(inInterval('[-1,-5)', 5)).toBeFalsy();
-  expect(inInterval('[,-5)', -100)).toBeTruthy();
-  expect(inInterval('[-1,)', 5)).toBeTruthy();
-  expect(inInterval('[-1,)', -1)).toBeTruthy();
-});
-
-test('incorrect interval', () => {
-  expect(inInterval('123jkvb12h3b12h3', 5)).toBeFalsy();
-});
-
-test('zero', () => {
-  expect(inInterval('[-10,0]', -5)).toBeTruthy();
-  expect(inInterval('[-10,0]', 1)).toBeFalsy();
-});
+## Benchmarks
+```
+inInterval: 8,857,180 ops/sec
 ```

@@ -1,7 +1,7 @@
 {
   "name": "math-interval-functions",
-  "version": "0.0.1",
-  "description": "",
+  "version": "1.0.0",
+  "description": "A tiny (89 bytes) and blazing fast solution for operations on intervals",
   "source": "src/index.ts",
   "main": "build/index.js",
   "module": "build/index.module.js",
@@ -9,7 +9,13 @@
   "license": "MIT",
   "author": "Viktor Pasynok",
   "email": "binjospookie@gmail.com",
-  "keywords": [],
+  "keywords": [
+    "math",
+    "interval",
+    "intervals",
+    "in interval",
+    "inInterval"
+  ],
   "private": false,
   "sideEffects": false,
   "files": [
@@ -20,12 +26,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:binjospookie/math-interval.git"
+    "url": "git@github.com:binjospookie/math-interval-functions.git"
   },
   "bugs": {
-    "url": "https://github.com/binjospookie/math-interval/issues"
+    "url": "https://github.com/binjospookie/math-interval-functions/issues"
   },
-  "homepage": "https://github.com/binjospookie/math-interval#readme",
+  "homepage": "https://github.com/binjospookie/math-interval-functions#readme",
   "scripts": {
     "build:js": "microbundle --compress --no-sourcemap --no-raw",
     "build": "rm -rf ./build && npm run build:js",

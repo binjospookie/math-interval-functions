@@ -13,7 +13,7 @@ const formatNumber = (x: number) =>
 
 test('Operations per second', () => {
   suite
-    .add('v0.0.1', () => {
+    .add('v1.0.0', () => {
       inInterval({
         interval: '[1,1000]',
         value: 50,
