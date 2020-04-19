@@ -28,6 +28,3 @@ test('Operations per second', () => {
     })
     .run();
 });
-
-// v1.0.0: 8,871,394 ops/sec (some)
-// v1.0.1: 16,497,359 ops/sec (some + binary search)

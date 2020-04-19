@@ -1,23 +1,18 @@
-interface IInterval {
+const intervalsList: readonly {
   readonly comparator: (x: { readonly max: number; readonly min: number; readonly value: number }) => boolean;
   readonly regex: RegExp;
-}
-
-const leftOpened: readonly IInterval[] = [
+}[] = [
   {
     comparator: ({ value, min, max }) => value > min && value < max,
     regex: /^\(([\d-.]*),([\d-.]*)\)$/,
   },
   {
-    comparator: ({ value, min, max }) => value > min && value <= max,
-    regex: /^\(([\d-.]*),([\d-.]*)\]$/,
-  },
-];
-
-const leftClosed: readonly IInterval[] = [
-  {
     comparator: ({ value, min, max }) => value >= min && value <= max,
     regex: /^\[([\d-.]*),([\d-.]*)\]$/,
+  },
+  {
+    comparator: ({ value, min, max }) => value > min && value <= max,
+    regex: /^\(([\d-.]*),([\d-.]*)\]$/,
   },
   {
     comparator: ({ value, min, max }) => value >= min && value < max,
@@ -25,10 +20,8 @@ const leftClosed: readonly IInterval[] = [
   },
 ];
 
-export const inInterval = ({ interval, value }: { interval: string; value: number }) => {
-  const list = /^\[/.exec(interval) ? leftOpened : leftClosed;
-
-  return list.some(({ regex, comparator }) => {
+export const inInterval = ({ interval, value }: { interval: string; value: number }) =>
+  intervalsList.some(({ regex, comparator }) => {
     const matchResult = regex.exec(interval);
 
     if (!matchResult) {
@@ -45,4 +38,3 @@ export const inInterval = ({ interval, value }: { interval: string; value: numbe
       value,
     });
   });
-};

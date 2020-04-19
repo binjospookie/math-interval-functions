@@ -8,6 +8,8 @@ pre-commit:
       run: npm run prettier
     lint:
       run: npm run lint
+    test:
+      run: npm t
 pre-push:
   commands:
 #    audit:
