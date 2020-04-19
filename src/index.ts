@@ -26,7 +26,7 @@ const leftClosed: readonly IInterval[] = [
 ];
 
 export const inInterval = ({ interval, value }: { interval: string; value: number }) => {
-  const list = /^\(/.exec(interval) ? leftClosed : leftOpened;
+  const list = /^\[/.exec(interval) ? leftOpened : leftClosed;
 
   return list.some(({ regex, comparator }) => {
     const matchResult = regex.exec(interval);
