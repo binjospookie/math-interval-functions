@@ -31,10 +31,8 @@ export const inInterval = ({ interval, value }: { interval: string; value: numbe
     const [match, min, max] = matchResult;
 
     return comparator({
-      // @ts-ignore allow js to cast string
-      max: max || Infinity,
-      // @ts-ignore allow js to cast string
-      min: min || -Infinity,
+      max: max.length ? +max : Infinity,
+      min: min.length ? +min : -Infinity,
       value,
     });
   });
