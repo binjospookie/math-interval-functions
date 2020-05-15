@@ -1,7 +1,7 @@
 {
   "name": "math-interval-functions",
-  "version": "1.0.0",
-  "description": "A tiny (89 bytes) and blazing fast solution for operations on intervals",
+  "version": "1.0.1",
+  "description": "A tiny (119 bytes) and blazing fast solution for operations on intervals",
   "source": "src/index.ts",
   "main": "build/index.js",
   "module": "build/index.module.js",
