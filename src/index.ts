@@ -1,38 +1,41 @@
-const intervalsList: readonly {
-  readonly comparator: (x: { readonly max: number; readonly min: number; readonly value: number }) => boolean;
-  readonly regex: RegExp;
-}[] = [
-  {
-    comparator: ({ value, min, max }) => value > min && value < max,
-    regex: /^\(([\d-.]*),([\d-.]*)\)$/,
-  },
-  {
-    comparator: ({ value, min, max }) => value >= min && value <= max,
-    regex: /^\[([\d-.]*),([\d-.]*)\]$/,
-  },
-  {
-    comparator: ({ value, min, max }) => value > min && value <= max,
-    regex: /^\(([\d-.]*),([\d-.]*)\]$/,
-  },
-  {
-    comparator: ({ value, min, max }) => value >= min && value < max,
-    regex: /^\[([\d-.]*),([\d-.]*)\)$/,
-  },
-];
+const getMinMax = ([_, min, max]: RegExpExecArray) => ({
+  min: min === '' ? -Infinity : +min,
+  max: max === '' ? Infinity : +max,
+});
 
-export const inInterval = ({ interval, value }: { interval: string; value: number }) =>
-  intervalsList.some(({ regex, comparator }) => {
-    const matchResult = regex.exec(interval);
+const a = /^\(([\d-.]*),([\d-.]*)\)$/;
+const b = /^\[([\d-.]*),([\d-.]*)\]$/;
+const c = /^\(([\d-.]*),([\d-.]*)\]$/;
+const d = /^\[([\d-.]*),([\d-.]*)\)$/;
 
-    if (!matchResult) {
-      return false;
-    }
+export const inInterval = ({ interval, value }: { interval: string; value: number }) => {
+  const oo = a.exec(interval);
+  if (oo) {
+    const { min, max } = getMinMax(oo);
 
-    const [match, min, max] = matchResult;
+    return value > min && value < max;
+  }
 
-    return comparator({
-      max: max.length ? +max : Infinity,
-      min: min.length ? +min : -Infinity,
-      value,
-    });
-  });
+  const cc = b.exec(interval);
+  if (cc) {
+    const { min, max } = getMinMax(cc);
+
+    return value >= min && value <= max;
+  }
+
+  const oc = c.exec(interval);
+  if (oc) {
+    const { min, max } = getMinMax(oc);
+
+    return value > min && value <= max;
+  }
+
+  const co = d.exec(interval);
+  if (co) {
+    const { min, max } = getMinMax(co);
+
+    return value >= min && value < max;
+  }
+
+  return false;
+};

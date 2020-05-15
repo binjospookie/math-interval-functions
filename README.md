@@ -3,7 +3,7 @@
 ![Version](https://badgen.net/npm/v/math-interval-functions)
 ![CI](https://github.com/binjospookie/math-interval-functions/workflows/Build/badge.svg)
 
-A tiny (109 bytes) and blazing fast solution for operations on intervals.
+A tiny (119 bytes) and blazing fast solution for operations on intervals.
 
 ## Installation
 `npm i math-interval-functions`
@@ -37,5 +37,5 @@ WIP
 
 ## Benchmarks
 ```
-inInterval: 8,857,180 ops/sec
+inInterval: 10,200,104 ops/sec
 ```
