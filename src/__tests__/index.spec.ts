@@ -234,4 +234,31 @@ describe('InInterval tests', () => {
       }),
     ).toBeFalsy();
   });
+
+  test('inf', () => {
+    expect(
+      inInterval({
+        interval: '[1,)',
+        value: Infinity,
+      }),
+    ).toBeTruthy();
+    expect(
+      inInterval({
+        interval: '(1,)',
+        value: Infinity,
+      }),
+    ).toBeTruthy();
+    expect(
+      inInterval({
+        interval: '(1,]',
+        value: Infinity,
+      }),
+    ).toBeTruthy();
+    expect(
+      inInterval({
+        interval: '[1,]',
+        value: Infinity,
+      }),
+    ).toBeTruthy();
+  });
 });
